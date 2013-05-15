@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="dsPrintInventory_Total" targetNamespace="http://tempuri.org/dsPrintInventory_Total.xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/dsPrintInventory_Total.xsd"
+	xmlns:mstns="http://tempuri.org/dsPrintInventory_Total.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="dsPrintInventory_Total" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="proc_report_inventoryReport_Total">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Vessel_x0020_Name" type="xs:string" minOccurs="0" />
+							<xs:element name="Lot_x0020_No." type="xs:string" minOccurs="0" />
+							<xs:element name="Fish_x0020_Specie" type="xs:string" minOccurs="0" />
+							<xs:element name="Fish_x0020_Size" type="xs:string" minOccurs="0" />
+							<xs:element name="Net_x0020_Weight" type="xs:double" minOccurs="0" />
+							<xs:element name="Date_x0020_From" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="Date_x0020_To" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="Date_x0020_Unloaded" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="Days" type="xs:int" minOccurs="0" />
+							<xs:element name="Due_x0020_Date" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="Header" type="xs:string" minOccurs="0" />
+							<xs:element name="Sublot" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

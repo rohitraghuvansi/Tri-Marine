@@ -1,0 +1,1486 @@
+--*********************************************************************************************************************************************************************
+--*********************************************************************************************************************************************************************
+--** Update the following Tables **********************************************************************************************************
+--*********************************************************************************************************************************************************************
+--*********************************************************************************************************************************************************************
+
+
+tblFGWithdrawal_Details
+
+endLoading	datetime
+pCode2		varchar(50)
+
+
+--*********************************************************************************************************************************************************************
+--*********************************************************************************************************************************************************************
+--** Create the following VIEWS **********************************************************************************************************
+--*********************************************************************************************************************************************************************
+--****************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+
+/****** Object:  View [dbo].[qry_Total_PalletTagsAllocated]    Script Date: 04/17/2013 10:45:23 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[qry_Total_PalletTagsAllocated]
+AS
+SELECT     dbo.tblFGWithdrawal_Details.palletCode, dbo.tblFGWithdrawal_Details.lot#, dbo.tblFGWithdrawal_Details.prodnDate, dbo.tblFGWithdrawal_Details.pCode, 
+                      dbo.tblLabeling_Details.pCode2, dbo.tblFGWithdrawal_Details.cycle, SUM(dbo.tblFGWithdrawal_Details.qty) * - 1 AS [Total Units]
+FROM         dbo.tblFGWithdrawal INNER JOIN
+                      dbo.tblFGWithdrawal_Details ON dbo.tblFGWithdrawal.loadingCode = dbo.tblFGWithdrawal_Details.loadingCode INNER JOIN
+                      dbo.tblLabeling ON dbo.tblFGWithdrawal_Details.palletCode = dbo.tblLabeling.palletCode INNER JOIN
+                      dbo.tblLabeling_Details ON dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode AND 
+                      dbo.tblFGWithdrawal_Details.pCode = dbo.tblLabeling_Details.pCode AND dbo.tblFGWithdrawal_Details.cycle = dbo.tblLabeling_Details.cycle
+GROUP BY dbo.tblFGWithdrawal_Details.palletCode, dbo.tblFGWithdrawal_Details.lot#, dbo.tblFGWithdrawal_Details.prodnDate, dbo.tblFGWithdrawal_Details.pCode, 
+                     dbo.tblFGWithdrawal_Details.cycle, dbo.tblLabeling_Details.pCode2
+
+-SELECT     dbo.tblFGWithdrawal_Details.palletCode, dbo.tblFGWithdrawal_Details.lot#, dbo.tblFGWithdrawal_Details.prodnDate, dbo.tblFGWithdrawal_Details.pCode, 
+-                      dbo.tblLabeling_Details.pCode2, dbo.tblFGWithdrawal_Details.cycle, SUM(dbo.tblFGWithdrawal_Details.qty) * - 1 AS [Total Units]
+-FROM         dbo.tblFGWithdrawal INNER JOIN
+-                      dbo.tblFGWithdrawal_Details ON dbo.tblFGWithdrawal.loadingCode = dbo.tblFGWithdrawal_Details.loadingCode INNER JOIN
+-                      dbo.tblLabeling ON dbo.tblFGWithdrawal_Details.palletCode = dbo.tblLabeling.palletCode INNER JOIN
+-                      dbo.tblLabeling_Details ON dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode AND 
+-                      dbo.tblFGWithdrawal_Details.pCode = dbo.tblLabeling_Details.pCode AND dbo.tblFGWithdrawal_Details.cycle = dbo.tblLabeling_Details.cycle INNER JOIN
+-                      dbo.tblFG_Shipments_Details ON dbo.tblFGWithdrawal.loadingCode = dbo.tblFG_Shipments_Details.loadingCode INNER JOIN
+-                      dbo.tblFG_Shipments ON dbo.tblFG_Shipments_Details.shipmentCode = dbo.tblFG_Shipments.shipmentCode
+-GROUP BY dbo.tblFGWithdrawal_Details.palletCode, dbo.tblFGWithdrawal_Details.lot#, dbo.tblFGWithdrawal_Details.prodnDate, dbo.tblFGWithdrawal_Details.pCode, 
+-                      dbo.tblFGWithdrawal_Details.cycle, dbo.tblLabeling_Details.pCode2
+
+GO
+
+--*********************************************************************************************************************************************************************
+
+USE [dbOIS]
+GO
+
+/****** Object:  View [dbo].[qry_Total_PalletTagsOutput]    Script Date: 04/17/2013 10:46:30 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[qry_Total_PalletTagsOutput]
+AS
+SELECT     dbo.tblLabeling.palletCode, dbo.tblProduction.lot#, dbo.tblProduction.prodnDate, dbo.tblLabeling_Details.pCode, dbo.tblLabeling_Details.pCode2, 
+                      dbo.tblLabeling_Details.cycle, SUM(dbo.tblLabeling_Details.cases * dbo.tblProduct_CanSize.tinsPerCase + dbo.tblLabeling_Details.tins) AS [Total Units]
+FROM         dbo.tblLabeling INNER JOIN
+                      dbo.tblLabeling_Details ON dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode INNER JOIN
+                      dbo.tblProduct ON dbo.tblLabeling_Details.pCode = dbo.tblProduct.pCode INNER JOIN
+                      dbo.tblProduct_CanSize ON dbo.tblProduct.canCode = dbo.tblProduct_CanSize.canCode INNER JOIN
+                      dbo.tblProduction ON dbo.tblLabeling_Details.retortCode = dbo.tblProduction.retortCode
+GROUP BY dbo.tblLabeling.palletCode, dbo.tblProduction.lot#, dbo.tblProduction.prodnDate, dbo.tblLabeling_Details.pCode, dbo.tblLabeling_Details.pCode2, 
+                      dbo.tblLabeling_Details.cycle
+
+GO
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+
+/****** Object:  View [dbo].[qry_Total_PalletTagsConsolidated]    Script Date: 04/17/2013 10:46:05 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[qry_Total_PalletTagsConsolidated]
+AS
+SELECT     palletCode, lot#, prodnDate, pCode, pCode2, cycle, [Total Units]
+FROM         qry_Total_PalletTagsOutput
+UNION
+SELECT     palletCode, lot#, prodnDate, pCode, pCode2, cycle, [Total Units]
+FROM         qry_Total_PalletTagsAllocated
+
+GO
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+
+/****** Object:  View [dbo].[qry_Total_PalletTagsInventory]    Script Date: 04/17/2013 10:46:18 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE VIEW [dbo].[qry_Total_PalletTagsInventory]
+AS
+SELECT     palletCode, lot#, prodnDate, pCode, pCode2, cycle, SUM([Total Units]) AS [Total Units]
+FROM         dbo.qry_Total_PalletTagsConsolidated
+GROUP BY palletCode, lot#, prodnDate, pCode, pCode2, cycle
+HAVING      (SUM([Total Units]) > 0)
+
+GO
+
+
+--*********************************************************************************************************************************************************************
+--*********************************************************************************************************************************************************************
+--** Create the following STORED PROCEDURES **********************************************************************************************************
+--*********************************************************************************************************************************************************************
+--*********************************************************************************************************************************************************************
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_displayFishWithdrawal_DetailsForLabeling]
+	-- Add the parameters for the stored procedure here
+	@prodnDate datetime,
+	@pCode varchar(50),
+	@pCode2 varchar(50),
+	@lot varchar(50),
+	@shift varchar(50),
+	@category varchar(50),
+	@sublot varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF @category = 'shift'
+		SELECT DISTINCT dbo.tblFishWithdrawal.prodnShift AS Shift
+		FROM         dbo.tblFishWithdrawal INNER JOIN
+                      dbo.tblFishWithdrawal_Details ON dbo.tblFishWithdrawal.fwsCode = dbo.tblFishWithdrawal_Details.fwsCode
+		WHERE     
+			(dbo.tblFishWithdrawal.prodnDate = @prodnDate)
+		ORDER BY Shift
+	ELSE IF @category = 'lot'
+		SELECT DISTINCT dbo.tblFishDeposit.batchlot AS [Trip Code]
+		FROM         dbo.tblFishWithdrawal INNER JOIN
+                      dbo.tblFishWithdrawal_Details ON dbo.tblFishWithdrawal.fwsCode = dbo.tblFishWithdrawal_Details.fwsCode INNER JOIN
+                      dbo.tblFishDeposit ON dbo.tblFishWithdrawal_Details.depositCode = dbo.tblFishDeposit.depositCode
+		WHERE     
+			(dbo.tblFishWithdrawal.prodnDate = @prodnDate) AND 
+			(dbo.tblFishWithdrawal.prodnShift = @shift)
+		ORDER BY [Trip Code]
+END
+GO
+
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_displayFishWithdrawal_DetailsForLabeling]    Script Date: 04/14/2013 11:17:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_displayFishWithdrawal_DetailsForLabeling]
+	-- Add the parameters for the stored procedure here
+	@prodnDate datetime,
+	@pCode varchar(50),
+	@pCode2 varchar(50),
+	@lot varchar(50),
+	@shift varchar(50),
+	@category varchar(50),
+	@sublot varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF @category = 'shift'
+		SELECT DISTINCT dbo.tblFishWithdrawal.prodnShift AS Shift
+		FROM         dbo.tblFishWithdrawal INNER JOIN
+                      dbo.tblFishWithdrawal_Details ON dbo.tblFishWithdrawal.fwsCode = dbo.tblFishWithdrawal_Details.fwsCode
+		WHERE     
+			(dbo.tblFishWithdrawal.prodnDate = @prodnDate)
+		ORDER BY Shift
+	ELSE IF @category = 'lot'
+		SELECT DISTINCT dbo.tblFishDeposit.batchlot AS [Trip Code]
+		FROM         dbo.tblFishWithdrawal INNER JOIN
+                      dbo.tblFishWithdrawal_Details ON dbo.tblFishWithdrawal.fwsCode = dbo.tblFishWithdrawal_Details.fwsCode INNER JOIN
+                      dbo.tblFishDeposit ON dbo.tblFishWithdrawal_Details.depositCode = dbo.tblFishDeposit.depositCode
+		WHERE     
+			(dbo.tblFishWithdrawal.prodnDate = @prodnDate) AND 
+			(dbo.tblFishWithdrawal.prodnShift = @shift)
+		ORDER BY [Trip Code]
+	ELSE IF @category = 'sublot'
+		SELECT DISTINCT dbo.tblFishDeposit.sublot AS [Lot Id]
+		FROM         dbo.tblFishWithdrawal INNER JOIN
+                      dbo.tblFishWithdrawal_Details ON dbo.tblFishWithdrawal.fwsCode = dbo.tblFishWithdrawal_Details.fwsCode INNER JOIN
+                      dbo.tblFishDeposit ON dbo.tblFishWithdrawal_Details.depositCode = dbo.tblFishDeposit.depositCode
+		WHERE     
+			(dbo.tblFishWithdrawal.prodnDate = @prodnDate) AND 
+			(dbo.tblFishWithdrawal.prodnShift = @shift) AND 
+			(dbo.tblFishDeposit.batchlot = @lot)
+		ORDER BY [Lot Id]
+END
+
+--*********************************************************************************************************************************************************************
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_getExistence_ProductionDetails]
+	-- Add the parameters for the stored procedure here
+	@retortCode varchar(50),
+	@pCode varchar(50),
+	@pCode2 varchar(50),
+	@recCount smallint OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT *
+	FROM         dbo.tblProduction_Details
+	WHERE     
+		(retortCode = @retortCode) AND 
+		(pCode = @pCode) AND 
+		(pCode2 = @pCode2)
+		
+	SET @recCount = @@ROWCOUNT
+END
+GO
+
+--*********************************************************************************************************************************************************************
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_display_PalletTagInventory]
+	-- Add the parameters for the stored procedure here
+	@packStyle varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT     0 AS Item, dbo.tblLabeling.pallet# AS [Pallet Tag], dbo.tblLabeling_Details.tagNo AS [Tag No.], dbo.qry_Total_PalletTagsInventory.lot# AS [Trip Code], 
+                      dbo.qry_Total_PalletTagsInventory.prodnDate AS [Prodn Date], dbo.qry_Total_PalletTagsInventory.pCode AS Product, 
+                      dbo.qry_Total_PalletTagsInventory.pCode2 AS [Sub-Code], dbo.tblLabels.lblDesc AS Description, dbo.qry_Total_PalletTagsInventory.cycle AS Cycle, 
+                      dbo.qry_Total_PalletTagsInventory.[Total Units]
+	FROM         dbo.qry_Total_PalletTagsInventory INNER JOIN
+                      dbo.tblProduct ON dbo.qry_Total_PalletTagsInventory.pCode = dbo.tblProduct.pCode INNER JOIN
+                      dbo.tblProduct_PackStyle ON dbo.tblProduct.psCode = dbo.tblProduct_PackStyle.psCode INNER JOIN
+                      dbo.tblLabeling ON dbo.qry_Total_PalletTagsInventory.palletCode = dbo.tblLabeling.palletCode INNER JOIN
+                      dbo.tblLabeling_Details ON dbo.tblProduct.pCode = dbo.tblLabeling_Details.pCode AND dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode AND 
+                      dbo.qry_Total_PalletTagsInventory.pCode = dbo.tblLabeling_Details.pCode AND dbo.qry_Total_PalletTagsInventory.pCode2 = dbo.tblLabeling_Details.pCode2 AND 
+                      dbo.qry_Total_PalletTagsInventory.cycle = dbo.tblLabeling_Details.cycle INNER JOIN
+                      dbo.tblLabels ON dbo.tblLabeling.lblCode = dbo.tblLabels.lblCode
+	WHERE     
+		(dbo.tblProduct_PackStyle.packType = @packStyle)
+	ORDER BY dbo.tblLabeling.dateTimeEncoded DESC
+END
+GO
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_display_PalletTagInventory]    Script Date: 04/20/2013 08:22:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_display_PalletTagInventory]
+	-- Add the parameters for the stored procedure here
+	@packStyle varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT     '0' AS Item, dbo.tblLabeling.pallet# AS [Pallet Tag], dbo.tblLabeling_Details.tagNo AS [Tag No.], dbo.qry_Total_PalletTagsInventory.lot# AS [Trip Code], 
+                      dbo.qry_Total_PalletTagsInventory.prodnDate AS [Prodn Date], dbo.qry_Total_PalletTagsInventory.pCode AS Product, 
+                      dbo.qry_Total_PalletTagsInventory.pCode2 AS [Sub-Code], dbo.tblLabels.lblDesc AS Description, dbo.qry_Total_PalletTagsInventory.cycle AS Cycle, 
+                      dbo.qry_Total_PalletTagsInventory.[Total Units]
+	FROM         dbo.qry_Total_PalletTagsInventory INNER JOIN
+                      dbo.tblProduct ON dbo.qry_Total_PalletTagsInventory.pCode = dbo.tblProduct.pCode INNER JOIN
+                      dbo.tblProduct_PackStyle ON dbo.tblProduct.psCode = dbo.tblProduct_PackStyle.psCode INNER JOIN
+                      dbo.tblLabeling ON dbo.qry_Total_PalletTagsInventory.palletCode = dbo.tblLabeling.palletCode INNER JOIN
+                      dbo.tblLabeling_Details ON dbo.tblProduct.pCode = dbo.tblLabeling_Details.pCode AND dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode AND 
+                      dbo.qry_Total_PalletTagsInventory.pCode = dbo.tblLabeling_Details.pCode AND dbo.qry_Total_PalletTagsInventory.pCode2 = dbo.tblLabeling_Details.pCode2 AND 
+                      dbo.qry_Total_PalletTagsInventory.cycle = dbo.tblLabeling_Details.cycle INNER JOIN
+                      dbo.tblLabels ON dbo.tblLabeling.lblCode = dbo.tblLabels.lblCode
+	WHERE     
+		(dbo.tblProduct_PackStyle.packType = @packStyle)
+	ORDER BY dbo.tblLabeling.dateTimeEncoded DESC
+END
+
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_addNew_FGWithdrawal_Details]    Script Date: 04/17/2013 16:47:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_addNew_FGWithdrawal_Details] 
+	-- Add the parameters for the stored procedure here
+	@loadingCode varchar(50), 
+	@palletCode varchar(50), 
+	@pCode varchar(50), 
+	@qty float, 
+	@loadingDate datetime,
+	@lot# varchar(50),
+	@prodnDate datetime,
+	@cycle varchar(50),
+	@endLoading datetime,
+	@pCode2 varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO dbo.tblFGWithdrawal_Details(loadingCode, palletCode, pCode, qty, loadingDate, lot#, prodnDate, cycle, endLoading, pCode2)
+	VALUES (@loadingCode, @palletCode, @pCode, @qty, @loadingDate, @lot#, @prodnDate, @cycle, @endLoading, @pCode2)
+
+END
+
+--*********************************************************************************************************************************************************************
+
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_getExistencePalletFromContainer]
+	-- Add the parameters for the stored procedure here
+	@loadingCode varchar(50),
+	@pallet varchar(50),
+	@tag varchar(50),
+	@pCode varchar(50),
+	@pCode2 varchar(50),
+	@lot varchar(50),
+	@prodnDate datetime,
+	@cycle varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT DISTINCT 
+                      dbo.tblLabeling.pallet# AS [Pallet No.], dbo.tblLabeling_Details.tagNo AS [Tag No], dbo.tblFGWithdrawal_Details.pCode AS [Product Code], 
+                      dbo.tblFGWithdrawal_Details.lot# AS [Lot No.], dbo.tblProduction.prodnDate AS [Prod'n Date'], dbo.tblFGWithdrawal_Details.qty AS [Total Units], 
+                      dbo.tblFGWithdrawal_Details.cycle AS Cycle, dbo.tblFGWithdrawal_Details.pCode2
+	FROM         dbo.tblFGWithdrawal INNER JOIN
+                      dbo.tblFGWithdrawal_Details ON dbo.tblFGWithdrawal.loadingCode = dbo.tblFGWithdrawal_Details.loadingCode INNER JOIN
+                      dbo.tblLabeling ON dbo.tblFGWithdrawal_Details.palletCode = dbo.tblLabeling.palletCode INNER JOIN
+                      dbo.tblLabeling_Details ON dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode AND 
+                      dbo.tblFGWithdrawal_Details.cycle = dbo.tblLabeling_Details.cycle INNER JOIN
+                      dbo.tblProduction ON dbo.tblLabeling_Details.retortCode = dbo.tblProduction.retortCode AND dbo.tblFGWithdrawal_Details.lot# = dbo.tblProduction.lot# AND 
+                      dbo.tblFGWithdrawal_Details.prodnDate = dbo.tblProduction.prodnDate
+	WHERE     
+		(dbo.tblFGWithdrawal.loadingCode = @loadingCode) AND 
+		(dbo.tblLabeling.pallet# = @pallet) AND 
+		(dbo.tblLabeling_Details.tagNo = @tag) AND 
+		(dbo.tblFGWithdrawal_Details.pCode = @pCode) AND 
+		(dbo.tblFGWithdrawal_Details.pCode2 = @pCode2) AND 
+		(dbo.tblFGWithdrawal_Details.lot# = @lot) AND 
+        (dbo.tblProduction.prodnDate = @prodnDate) AND 
+        (dbo.tblFGWithdrawal_Details.cycle = @cycle)
+END
+GO
+
+--*********************************************************************************************************************************************************************
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_display_PalletTagInventoryWithContainerDetails]
+	-- Add the parameters for the stored procedure here
+	@packStyle varchar(50),
+	@loadingCode varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT     '0' AS Item, dbo.tblLabeling.pallet# AS [Pallet Tag], dbo.tblLabeling_Details.tagNo AS [Tag No.], dbo.qry_Total_PalletTagsInventory.lot# AS [Trip Code], 
+                      dbo.qry_Total_PalletTagsInventory.prodnDate AS [Prodn Date], dbo.qry_Total_PalletTagsInventory.pCode AS Product, 
+                      dbo.qry_Total_PalletTagsInventory.pCode2 AS [Sub-Code], dbo.tblLabels.lblDesc AS Description, dbo.qry_Total_PalletTagsInventory.cycle AS Cycle, 
+                      dbo.qry_Total_PalletTagsInventory.[Total Units]
+	FROM         dbo.qry_Total_PalletTagsInventory INNER JOIN
+                      dbo.tblProduct ON dbo.qry_Total_PalletTagsInventory.pCode = dbo.tblProduct.pCode INNER JOIN
+                      dbo.tblProduct_PackStyle ON dbo.tblProduct.psCode = dbo.tblProduct_PackStyle.psCode INNER JOIN
+                      dbo.tblLabeling ON dbo.qry_Total_PalletTagsInventory.palletCode = dbo.tblLabeling.palletCode INNER JOIN
+                      dbo.tblLabeling_Details ON dbo.tblProduct.pCode = dbo.tblLabeling_Details.pCode AND dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode AND 
+                      dbo.qry_Total_PalletTagsInventory.pCode = dbo.tblLabeling_Details.pCode AND dbo.qry_Total_PalletTagsInventory.pCode2 = dbo.tblLabeling_Details.pCode2 AND 
+                      dbo.qry_Total_PalletTagsInventory.cycle = dbo.tblLabeling_Details.cycle INNER JOIN
+                      dbo.tblLabels ON dbo.tblLabeling.lblCode = dbo.tblLabels.lblCode
+	WHERE     
+		(dbo.tblProduct_PackStyle.packType = @packStyle)
+	--ORDER BY dbo.tblLabeling.dateTimeEncoded DESC
+	UNION
+	SELECT DISTINCT 
+                      '-1' AS Item, dbo.tblLabeling.pallet# AS [Pallet Tag], dbo.tblLabeling_Details.tagNo AS [Tag No], dbo.tblFGWithdrawal_Details.lot# AS [Trip Code], 
+                      dbo.tblProduction.prodnDate AS [Prodn Date], dbo.tblFGWithdrawal_Details.pCode AS Product, dbo.tblFGWithdrawal_Details.pCode2 AS [Sub-Code], 
+                      dbo.tblLabels.lblDesc AS Description, dbo.tblFGWithdrawal_Details.cycle AS Cycle, dbo.tblFGWithdrawal_Details.qty AS [Total Units]
+	FROM         dbo.tblFGWithdrawal INNER JOIN
+                      dbo.tblFGWithdrawal_Details ON dbo.tblFGWithdrawal.loadingCode = dbo.tblFGWithdrawal_Details.loadingCode INNER JOIN
+                      dbo.tblLabeling ON dbo.tblFGWithdrawal_Details.palletCode = dbo.tblLabeling.palletCode INNER JOIN
+                      dbo.tblLabeling_Details ON dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode AND 
+                      dbo.tblFGWithdrawal_Details.cycle = dbo.tblLabeling_Details.cycle INNER JOIN
+                      dbo.tblProduction ON dbo.tblLabeling_Details.retortCode = dbo.tblProduction.retortCode AND dbo.tblFGWithdrawal_Details.lot# = dbo.tblProduction.lot# AND 
+                      dbo.tblFGWithdrawal_Details.prodnDate = dbo.tblProduction.prodnDate INNER JOIN
+                      dbo.tblLabels ON dbo.tblLabeling.lblCode = dbo.tblLabels.lblCode INNER JOIN
+                      dbo.tblProduct ON dbo.tblFGWithdrawal_Details.pCode = dbo.tblProduct.pCode AND dbo.tblLabeling_Details.pCode = dbo.tblProduct.pCode INNER JOIN
+                      dbo.tblProduct_PackStyle ON dbo.tblProduct.psCode = dbo.tblProduct_PackStyle.psCode
+	WHERE     
+		(dbo.tblFGWithdrawal.loadingCode = @loadingCode) AND 
+		(dbo.tblProduct_PackStyle.packType = @packStyle)
+END
+GO
+
+--*********************************************************************************************************************************************************************
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_getFGWithdrawn_Other]    Script Date: 04/20/2013 12:06:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_getFGWithdrawn_Other]
+	-- Add the parameters for the stored procedure here
+	@loadingCode varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	--SELECT DISTINCT 
+ --                     dbo.tblProduct_PackStyle.packType, dbo.tblFGWithdrawal.loadingType, dbo.tblFGWithdrawal.cont#, dbo.tblFGWithdrawal.voyageName, 
+ --                     dbo.tblFGWithdrawal.purposeType, dbo.tblFGWithdrawal.purpose, dbo.tblFGWithdrawal.seal# AS [Seal#]
+	--FROM dbo.tblProduct_PackStyle INNER JOIN
+ --                     dbo.tblProduct ON dbo.tblProduct_PackStyle.psCode = dbo.tblProduct.psCode INNER JOIN
+ --                     dbo.tblFGWithdrawal_Details ON dbo.tblProduct.pCode = dbo.tblFGWithdrawal_Details.pCode INNER JOIN
+ --                     dbo.tblFGWithdrawal ON dbo.tblFGWithdrawal_Details.loadingCode = dbo.tblFGWithdrawal.loadingCode
+	--WHERE     
+	--	(dbo.tblFGWithdrawal.loadingCode = @loadingCode)
+	
+	SELECT DISTINCT 
+                      dbo.tblProduct_PackStyle.packType, dbo.tblFGWithdrawal.loadingType, dbo.tblFGWithdrawal.cont#, dbo.tblFGWithdrawal.voyageName, 
+                      dbo.tblFGWithdrawal.purposeType, dbo.tblFGWithdrawal.purpose, dbo.tblFGWithdrawal.seal# AS Seal#, tblFGWithdrawal_Details_1.loadingDate, 
+                      tblFGWithdrawal_Details_1.endLoading
+	FROM         dbo.tblProduct_PackStyle INNER JOIN
+                      dbo.tblProduct ON dbo.tblProduct_PackStyle.psCode = dbo.tblProduct.psCode INNER JOIN
+                      dbo.tblFGWithdrawal_Details ON dbo.tblProduct.pCode = dbo.tblFGWithdrawal_Details.pCode INNER JOIN
+                      dbo.tblFGWithdrawal ON dbo.tblFGWithdrawal_Details.loadingCode = dbo.tblFGWithdrawal.loadingCode INNER JOIN
+                      dbo.tblFGWithdrawal_Details AS tblFGWithdrawal_Details_1 ON dbo.tblProduct.pCode = tblFGWithdrawal_Details_1.pCode AND 
+                      dbo.tblFGWithdrawal.loadingCode = tblFGWithdrawal_Details_1.loadingCode
+	WHERE     
+		(dbo.tblFGWithdrawal.loadingCode = @loadingCode)
+END
+
+
+--*********************************************************************************************************************************************************************
+
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_getFGWithdrawn_Transfer]    Script Date: 04/20/2013 12:07:50 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_getFGWithdrawn_Transfer]
+	-- Add the parameters for the stored procedure here
+	@loadingCode varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	--SELECT DISTINCT 
+ --                     dbo.tblProduct_PackStyle.packType, dbo.tblFGWithdrawal.loadingType, dbo.tblFGWithdrawal.cont#, dbo.tblFGWithdrawal.voyageName, 
+ --                     dbo.tblFGWithdrawal.purposeType, dbo.tblWarehouse.whName, dbo.tblFGWithdrawal.seal# AS [Seal#]
+	--FROM dbo.tblProduct_PackStyle INNER JOIN
+ --                     dbo.tblProduct ON dbo.tblProduct_PackStyle.psCode = dbo.tblProduct.psCode INNER JOIN
+ --                     dbo.tblFGWithdrawal_Details ON dbo.tblProduct.pCode = dbo.tblFGWithdrawal_Details.pCode INNER JOIN
+ --                     dbo.tblFGWithdrawal INNER JOIN
+ --                     dbo.tblWarehouse ON dbo.tblFGWithdrawal.purpose = dbo.tblWarehouse.whCode ON 
+ --                     dbo.tblFGWithdrawal_Details.loadingCode = dbo.tblFGWithdrawal.loadingCode
+	--WHERE     
+	--	(dbo.tblFGWithdrawal.loadingCode = @loadingCode)
+	
+	SELECT DISTINCT 
+                      dbo.tblProduct_PackStyle.packType, dbo.tblFGWithdrawal.loadingType, dbo.tblFGWithdrawal.cont#, dbo.tblFGWithdrawal.voyageName, 
+                      dbo.tblFGWithdrawal.purposeType, dbo.tblFGWithdrawal.purpose, dbo.tblFGWithdrawal.seal# AS Seal#, tblFGWithdrawal_Details_1.loadingDate, 
+                      tblFGWithdrawal_Details_1.endLoading
+	FROM         dbo.tblProduct_PackStyle INNER JOIN
+                      dbo.tblProduct ON dbo.tblProduct_PackStyle.psCode = dbo.tblProduct.psCode INNER JOIN
+                      dbo.tblFGWithdrawal_Details ON dbo.tblProduct.pCode = dbo.tblFGWithdrawal_Details.pCode INNER JOIN
+                      dbo.tblFGWithdrawal ON dbo.tblFGWithdrawal_Details.loadingCode = dbo.tblFGWithdrawal.loadingCode INNER JOIN
+                      dbo.tblFGWithdrawal_Details AS tblFGWithdrawal_Details_1 ON dbo.tblProduct.pCode = tblFGWithdrawal_Details_1.pCode AND 
+                      dbo.tblFGWithdrawal.loadingCode = tblFGWithdrawal_Details_1.loadingCode
+	WHERE     
+		(dbo.tblFGWithdrawal.loadingCode = @loadingCode)
+END
+
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_report_releaseReport_tableView]    Script Date: 04/20/2013 12:34:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_report_releaseReport_tableView]
+	-- Add the parameters for the stored procedure here
+	@container varchar(50),
+	@seal varchar(50),
+	@loadingDate datetime,
+	@loadStart datetime,
+	@loadEnd datetime
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT     dbo.tblFGWithdrawal.cont#, dbo.tblFGWithdrawal.seal# AS [Seal #], dbo.tblBuyer.buyerName, dbo.tblLabeling.pallet# AS [Pallet No.], 
+                      dbo.tblLabeling_Details.tagNo AS [Tag No.], dbo.tblLabeling.loinGrade AS [Loin Grade], dbo.tblFGWithdrawal_Details.pCode AS [Product Code], 
+                      dbo.tblFGWithdrawal_Details.prodnDate AS [Prod'n Date'], dbo.tblFGWithdrawal_Details.lot# AS [Lot No.], 
+                      dbo.tblFGWithdrawal_Details.cycle AS [CPF No.], dbo.tblFGWithdrawal_Details.qty AS [# of Bags], dbo.tblLabeling.gw, dbo.tblLabeling.nw, '' AS Expr1, 
+                      '' AS [Micro Results], '' AS [QA Disposition], dbo.tblLabeling.remarks, dbo.tblFGWithdrawal_Details.loadingDate AS [Loading Date], dbo.tblFGWithdrawal_Details.loadingDate AS [Loading Start], 
+                      dbo.tblFGWithdrawal_Details.endLoading AS [Load End]
+	FROM         dbo.tblFGWithdrawal INNER JOIN
+                      dbo.tblFGWithdrawal_Details ON dbo.tblFGWithdrawal.loadingCode = dbo.tblFGWithdrawal_Details.loadingCode INNER JOIN
+                      dbo.tblLabeling ON dbo.tblFGWithdrawal_Details.palletCode = dbo.tblLabeling.palletCode INNER JOIN
+                      dbo.tblLabeling_Details ON dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode AND 
+                      dbo.tblFGWithdrawal_Details.cycle = dbo.tblLabeling_Details.cycle AND 
+                      dbo.tblFGWithdrawal_Details.pCode = dbo.tblLabeling_Details.pCode INNER JOIN
+                      dbo.tblBuyer ON dbo.tblLabeling.buyerCode = dbo.tblBuyer.buyerCode INNER JOIN
+                      dbo.tblProduction ON dbo.tblLabeling_Details.retortCode = dbo.tblProduction.retortCode AND 
+                      dbo.tblFGWithdrawal_Details.prodnDate = dbo.tblProduction.prodnDate AND dbo.tblFGWithdrawal_Details.lot# = dbo.tblProduction.lot#
+	WHERE     
+		(dbo.tblFGWithdrawal.cont# = @container) AND 
+		(dbo.tblFGWithdrawal.seal# = @seal)
+END
+
+--*********************************************************************************************************************************************************************
+
+
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_displayFGWithdrawalDetails]    Script Date: 04/20/2013 12:54:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_displayFGWithdrawalDetails]
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+--	SELECT DISTINCT 
+--                      TOP (100) PERCENT dbo.tblFGWithdrawal.loadingType AS [Loading Type], dbo.tblFGWithdrawal.voyageName AS [Voyage Name], 
+--                      dbo.tblFGWithdrawal.cont# AS [Container#/ Hatch#], dbo.tblFGWithdrawal_Details.loadingDate AS [Loading Date], 
+--                      dbo.tblFGWithdrawal_Details.pCode AS [Product Code], dbo.tblFGWithdrawal_Details.qty / dbo.tblProduction_Details.cansPerCase AS [No. of Cases], 
+--                      dbo.tblFGWithdrawal_Details.qty AS [Total Units], dbo.tblFGWithdrawal.purposeType AS [Type of Purpose], 
+--                      dbo.tblFGWithdrawal.loadingCode AS [Control Code], dbo.tblFGWithdrawal.seal# AS Seal#
+--	FROM         dbo.tblFGWithdrawal INNER JOIN
+--                      dbo.tblFGWithdrawal_Details ON dbo.tblFGWithdrawal.loadingCode = dbo.tblFGWithdrawal_Details.loadingCode INNER JOIN
+--                      dbo.tblLabeling ON dbo.tblFGWithdrawal_Details.palletCode = dbo.tblLabeling.palletCode INNER JOIN
+--                      dbo.tblLabeling_Details ON dbo.tblLabeling.palletCode = dbo.tblLabeling_Details.palletCode INNER JOIN
+--                      dbo.tblProduction ON dbo.tblLabeling_Details.retortCode = dbo.tblProduction.retortCode INNER JOIN
+--                      dbo.tblProduction_Details ON dbo.tblProduction.retortCode = dbo.tblProduction_Details.retortCode
+--	ORDER BY [Loading Date] DESC, [Voyage Name]
+
+--	SELECT DISTINCT 
+--                      dbo.tblFGWithdrawal.loadingCode AS [Control Code], dbo.tblFGWithdrawal.cont# AS [Container#/ Hatch#], 
+--                      dbo.tblFGWithdrawal.seal# AS Seal#, dbo.tblFGWithdrawal.loadingType AS [Loading Type], dbo.tblFGWithdrawal.voyageName AS [Voyage Name], 
+--                      dbo.tblFGWithdrawal.purposeType AS [Type of Purpose]
+--	FROM         dbo.tblFGWithdrawal INNER JOIN
+--                      dbo.tblFGWithdrawal_Details ON dbo.tblFGWithdrawal.loadingCode = dbo.tblFGWithdrawal_Details.loadingCode
+--	ORDER BY [Control Code] DESC
+
+	--SELECT DISTINCT 
+ --                     TOP (100) PERCENT dbo.tblFGWithdrawal.loadingCode AS [Control Code], dbo.tblFGWithdrawal.cont# AS [Container#/ Hatch#], 
+ --                     dbo.tblFGWithdrawal.seal# AS Seal#, dbo.tblFGWithdrawal.loadingType AS [Loading Type], dbo.tblFGWithdrawal.voyageName AS [Voyage Name], 
+ --                     dbo.tblFGWithdrawal.purposeType AS [Type of Purpose], dbo.tblFGWithdrawal.id AS ID
+	--FROM         dbo.tblFGWithdrawal INNER JOIN
+ --                     dbo.tblFGWithdrawal_Details ON dbo.tblFGWithdrawal.loadingCode = dbo.tblFGWithdrawal_Details.loadingCode
+	--ORDER BY ID DESC, [Control Code] DESC
+	
+	SELECT DISTINCT 
+                      TOP (100) PERCENT loadingCode AS [Control Code], cont# AS [Container#/ Hatch#], seal# AS Seal#, loadingType AS [Loading Type], voyageName AS [Voyage Name], 
+                      purposeType AS [Type of Purpose], id AS ID
+	FROM         dbo.tblFGWithdrawal
+	ORDER BY ID DESC, [Control Code] DESC
+END
+
+
+--*********************************************************************************************************************************************************************
+
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_display_FG_ShipmentContainers_byBOL]    Script Date: 04/20/2013 13:12:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_display_FG_ShipmentContainers_byBOL]
+	-- Add the parameters for the stored procedure here
+	@deptDate datetime,
+	@vesselNo varchar(100),
+	@bol varchar(50),
+	@destination varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	--SELECT DISTINCT dbo.tblFGWithdrawal.cont# AS [Container No.], dbo.tblFGWithdrawal.seal# AS [Seal No.]
+	--FROM         dbo.tblFG_Shipments INNER JOIN
+ --                     dbo.tblFG_Shipments_Details ON dbo.tblFG_Shipments.shipmentCode = dbo.tblFG_Shipments_Details.shipmentCode INNER JOIN
+ --                     dbo.tblFGWithdrawal ON dbo.tblFG_Shipments_Details.loadingCode = dbo.tblFGWithdrawal.loadingCode
+	--WHERE     
+	--	(dbo.tblFG_Shipments.departDate = @deptDate) AND 
+	--	(dbo.tblFG_Shipments.vesselNo = @vesselNo) AND 
+	--	(dbo.tblFG_Shipments.BOL = @bol)
+	
+	SELECT DISTINCT '0' AS [Item], cont# AS [Container No.], seal# AS [Seal No.]
+	FROM         dbo.tblFGWithdrawal
+	WHERE     
+			(loaded = 'N')
+	UNION
+	SELECT DISTINCT '-1' AS [Item], dbo.tblFGWithdrawal.cont# AS [Container No.], dbo.tblFGWithdrawal.seal# AS [Seal No.]
+	FROM         dbo.tblFG_Shipments INNER JOIN
+                      dbo.tblFG_Shipments_Details ON dbo.tblFG_Shipments.shipmentCode = dbo.tblFG_Shipments_Details.shipmentCode INNER JOIN
+                      dbo.tblFGWithdrawal ON dbo.tblFG_Shipments_Details.loadingCode = dbo.tblFGWithdrawal.loadingCode
+	WHERE     
+		(dbo.tblFG_Shipments.departDate = @deptDate) AND 
+		(dbo.tblFG_Shipments.vesselNo = @vesselNo) AND 
+		(dbo.tblFG_Shipments.BOL = @bol) AND 
+        (dbo.tblFG_Shipments.destination = @destination)
+END
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_getExistence_Shipment]    Script Date: 04/20/2013 13:23:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_getExistence_Shipment]
+	-- Add the parameters for the stored procedure here
+	@vessel varchar(100),
+	@vesselNo varchar(50),
+	@departureDate datetime,
+	@bol varchar(50),
+	@destination varchar(50),
+	@recCount smallint OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT *
+	FROM         dbo.tblFG_Shipments
+	WHERE     
+		(vesselName = @vessel) AND 
+		(vesselNo = @vesselNo) AND 
+		(departDate = @departureDate) AND
+		(BOL = @bol) AND
+		(destination = @destination)
+
+	SET @recCount = @@ROWCOUNT
+END
+
+
+
+--*********************************************************************************************************************************************************************
+
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_displayAll_FG_Shipments]    Script Date: 04/20/2013 14:11:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_displayAll_FG_Shipments]
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	
+	SELECT DISTINCT 
+                      departDate AS [Departure Date], vesselName AS [Vessel Name], vesselNo AS [Vessel No], BOL, destination AS Destination, 
+                      shipmentCode AS [Shipment Cod], id AS [ID]
+	FROM         dbo.tblFG_Shipments
+	ORDER BY departDate DESC
+END
+
+
+--*********************************************************************************************************************************************************************
+
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_update_FG_Shipment]    Script Date: 04/20/2013 14:18:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_update_FG_Shipment]
+	-- Add the parameters for the stored procedure here
+	@shipmentCode varchar(50),
+	@BOL varchar(50),
+	@destination varchar(50),
+	@vesselname varchar(50),
+	@vesselNo varchar(50),
+	@departDate datetime,
+	@id bigint,
+	@recCount smallint OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	
+	UPDATE dbo.tblFG_Shipments
+	SET
+		vesselName = @vesselName,
+		vesselNo = @vesselNo,
+		departDate = @departDate,
+		BOL = @BOL, 
+		destination = @destination
+	WHERE     
+		id = @id
+	--(shipmentCode = @shipmentCode)
+
+	SET @recCount = @@ROWCOUNT
+END
+
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_displayVessel_byDate]    Script Date: 04/22/2013 09:47:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_displayVessel_byDate]
+	-- Add the parameters for the stored procedure here
+	@departureDate datetime,
+	@vessel varchar(100),
+	@category varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF @category = '1'
+		SELECT DISTINCT vesselName AS [Vessel Name]
+		FROM         dbo.tblFG_Shipments
+		WHERE     
+			(departDate = @departureDate) 
+		ORDER BY [Vessel Name]
+	ELSE IF @category = '2'
+		SELECT DISTINCT vesselNo AS [Vessel No.]
+		FROM         dbo.tblFG_Shipments
+		WHERE     
+			(departDate = @departureDate) AND 
+			(vesselName = @vessel)
+		ORDER BY [Vessel No.]
+	ELSE IF @category = '3'
+		SELECT DISTINCT destination AS [Destination]
+		FROM         dbo.tblFG_Shipments
+		WHERE     
+			(departDate = @departureDate) AND 
+			(vesselName = @vessel)
+		ORDER BY [Destination]
+	ELSE
+		SELECT DISTINCT BOL AS [BOL]
+		FROM         dbo.tblFG_Shipments
+		WHERE     
+			(departDate = @departureDate) AND 
+			(vesselName = @vessel)
+		ORDER BY [BOL]
+		
+END
+
+--*********************************************************************************************************************************************************************
+
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_display_FG_ShipmentContainers]    Script Date: 04/22/2013 09:59:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_display_FG_ShipmentContainers]
+	-- Add the parameters for the stored procedure here
+	--@shipmentCode varchar(50)
+	@deptDate datetime,
+	@vesselNo varchar(100),
+	@destination varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	
+	--SELECT DISTINCT dbo.tblFGWithdrawal.cont# AS [Container No.], dbo.tblFGWithdrawal.seal# AS [Seal No.]
+	--FROM         dbo.tblFG_Shipments INNER JOIN
+ --                     dbo.tblFG_Shipments_Details ON dbo.tblFG_Shipments.shipmentCode = dbo.tblFG_Shipments_Details.shipmentCode INNER JOIN
+ --                     dbo.tblFGWithdrawal ON dbo.tblFG_Shipments_Details.loadingCode = dbo.tblFGWithdrawal.loadingCode
+	--WHERE     
+	--	(dbo.tblFG_Shipments.shipmentCode = @shipmentCode)
+
+	SELECT DISTINCT dbo.tblFGWithdrawal.cont# AS [Container No.], dbo.tblFGWithdrawal.seal# AS [Seal No.]
+	FROM         dbo.tblFG_Shipments INNER JOIN
+                      dbo.tblFG_Shipments_Details ON dbo.tblFG_Shipments.shipmentCode = dbo.tblFG_Shipments_Details.shipmentCode INNER JOIN
+                      dbo.tblFGWithdrawal ON dbo.tblFG_Shipments_Details.loadingCode = dbo.tblFGWithdrawal.loadingCode
+	WHERE     
+		(dbo.tblFG_Shipments.departDate = @deptDate) AND 
+		(dbo.tblFG_Shipments.vesselNo = @vesselNo) AND
+		(dbo.tblFG_Shipments.destination = @destination)
+	
+	--SELECT DISTINCT '-1' AS Item, dbo.tblFGWithdrawal.cont# AS [Container No.], dbo.tblFGWithdrawal.seal# AS [Seal No.]
+	--FROM         dbo.tblFG_Shipments INNER JOIN
+ --                     dbo.tblFG_Shipments_Details ON dbo.tblFG_Shipments.shipmentCode = dbo.tblFG_Shipments_Details.shipmentCode INNER JOIN
+ --                     dbo.tblFGWithdrawal ON dbo.tblFG_Shipments_Details.loadingCode = dbo.tblFGWithdrawal.loadingCode
+	--WHERE     
+	--	(dbo.tblFG_Shipments.departDate = @deptDate) AND 
+	--	(dbo.tblFG_Shipments.vesselNo = @vesselNo) AND 
+	--	(dbo.tblFG_Shipments.destination = @destination)
+END
+
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_getFGShipmentCode]    Script Date: 04/22/2013 10:08:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_getFGShipmentCode]
+	-- Add the parameters for the stored procedure here
+	@departDate datetime,
+	@vessel varchar(100),
+	@voyageNo varchar(50),
+	@destination varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT     shipmentCode
+	FROM         dbo.tblFG_Shipments
+	WHERE     
+		(departDate = @departDate) AND 
+		(vesselName = @vessel) AND 
+		(vesselNo = @voyageNo) AND
+		(destination = @destination)
+END
+
+--*********************************************************************************************************************************************************************
+
+
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_display_FishBinSettlement]
+	-- Add the parameters for the stored procedure here
+	@lot varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT     dbo.tblFishDeposit.batchlot AS [Lot No.], dbo.tblFishDeposit.sublot AS Sublot, dbo.tblFishBins.bin# AS [Bin No.], dbo.tblFishSpecie.specie AS [Fish Species], 
+                      dbo.tblFishSizes.sizeRange AS [Fish Sizes], dbo.tblFishDeposit.grossWeight AS GW, dbo.tblFishBins.tareWeight AS TW, 
+                      dbo.tblFishDeposit.grossWeight - dbo.tblFishBins.tareWeight AS [Net Weight], '' AS [Date Processed]
+	FROM         dbo.tblFishSizes INNER JOIN
+                      dbo.tblFishDeposit ON dbo.tblFishSizes.sizeCode = dbo.tblFishDeposit.sizeCode INNER JOIN
+                      dbo.tblFishBins ON dbo.tblFishDeposit.binCode = dbo.tblFishBins.binCode INNER JOIN
+                      dbo.tblFishSpecie ON dbo.tblFishDeposit.specieCode = dbo.tblFishSpecie.specieCode
+	WHERE     
+		(dbo.tblFishDeposit.batchlot = @lot)
+END
+GO
+
+--*********************************************************************************************************************************************************************
+
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_get_FishBinProcessedDate]
+	-- Add the parameters for the stored procedure here
+	@lot varchar(50),
+	@bin varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT     dbo.tblFishWithdrawal.prodnDate
+	FROM         dbo.tblFishBins INNER JOIN
+                      dbo.tblFishDeposit ON dbo.tblFishBins.binCode = dbo.tblFishDeposit.binCode INNER JOIN
+                      dbo.tblFishWithdrawal_Details ON dbo.tblFishDeposit.depositCode = dbo.tblFishWithdrawal_Details.depositCode INNER JOIN
+                      dbo.tblFishWithdrawal ON dbo.tblFishWithdrawal_Details.fwsCode = dbo.tblFishWithdrawal.fwsCode
+	WHERE     
+		(dbo.tblFishDeposit.batchlot = @lot) AND 
+		(dbo.tblFishBins.bin# = @bin)
+END
+GO
+--*********************************************************************************************************************************************************************
+
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_getContainerShipmentStatus]
+	-- Add the parameters for the stored procedure here
+	@loadingCode varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT shipped
+	FROM dbo.tblFGWithdrawal
+	WHERE     
+		(loadingCode = @loadingCode)
+END
+GO
+
+--*********************************************************************************************************************************************************************
+
+
+-- ================================================
+-- Template generated from Template Explorer using:
+-- Create Procedure (New Menu).SQL
+--
+-- Use the Specify Values for Template Parameters 
+-- command (Ctrl-Shift-M) to fill in the parameter 
+-- values below.
+--
+-- This block of comments will not be included in
+-- the definition of the procedure.
+-- ================================================
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[proc_displaySTP_FishInventory]
+	-- Add the parameters for the stored procedure here
+	@dateFrom datetime,
+	@dateTo datetime,
+	@category varchar(50),
+	@dateOut datetime
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	    IF @category = 'inventory'
+		SELECT     dbo.tblFishDeposit.dateTimeTransfer AS [Date Unloaded], dbo.tblFishDeposit.rrNo AS Receipt#, dbo.tblFishDeposit.batchlot AS [Trip Code], 
+						  dbo.tblFishBins.bin# AS [Bin No.], dbo.tblFishDeposit.sublot AS [Lot Id], dbo.tblFishSpecie.specie AS [Fish Species], dbo.tblFishSizes.sizeRange AS [Fish Sizes], 
+						  dbo.tblFishDeposit.grossWeight - dbo.tblFishBins.tareWeight AS [TonsIN], @dateOut AS [Date Out], 0 AS [TonsOUT], DATEDIFF(dd, dbo.tblFishDeposit.dateTimeTransfer, CONVERT(datetime, 
+						  @dateTo, 103)) AS [Days]
+		FROM         dbo.tblFishDeposit INNER JOIN
+						  dbo.tblFishBins ON dbo.tblFishDeposit.binCode = dbo.tblFishBins.binCode INNER JOIN
+						  dbo.tblFishSpecie ON dbo.tblFishDeposit.specieCode = dbo.tblFishSpecie.specieCode INNER JOIN
+						  dbo.tblFishSizes ON dbo.tblFishDeposit.sizeCode = dbo.tblFishSizes.sizeCode
+		WHERE     
+			(dbo.tblFishDeposit.withdraw = 'NO') AND 
+			(dbo.tblFishDeposit.depositStatus = '*')
+		ORDER BY dbo.tblFishDeposit.dateTimeTransfer
+	ELSE
+		BEGIN
+			DECLARE @bufferTable Table(
+				dateUnloaded datetime, 
+				rr varchar(50), 
+				tripCode varchar(50), 
+				bin varchar(50), 
+				lotId varchar(50), 
+				species varchar(50), 
+				sizes varchar(50), 
+				nwIN float, 
+				outDate datetime, 
+				nwOUT float, 
+				noOfDays int)
+			
+			DECLARE @dateUnloaded datetime, 
+				@rr varchar(50), 
+				@tripCode varchar(50), 
+				@bin varchar(50), 
+				@lotId varchar(50), 
+				@species varchar(50), 
+				@sizes varchar(50), 
+				@nwIN float, 
+				@outDate datetime, 
+				@nwOUT float, 
+				@noOfDays int
+			
+			DECLARE bin_Cursor CURSOR FOR
+				SELECT     dbo.tblFishDeposit.dateTimeTransfer AS [Date Unloaded], dbo.tblFishDeposit.rrNo AS Receipt#, dbo.tblFishDeposit.batchlot AS [Trip Code], 
+							  dbo.tblFishBins.bin# AS [Bin No.], dbo.tblFishDeposit.sublot AS [Lot Id], dbo.tblFishSpecie.specie AS [Fish Species], dbo.tblFishSizes.sizeRange AS [Fish Sizes], 
+							  dbo.tblFishDeposit.grossWeight - dbo.tblFishBins.tareWeight AS TonsIN, @dateOut AS [Date Out], 0 AS TonsOUT, DATEDIFF(dd, dbo.tblFishDeposit.dateTimeTransfer, 
+							  CONVERT(datetime, @dateOut, 103)) AS [Days]
+				FROM         dbo.tblFishDeposit INNER JOIN
+							  dbo.tblFishBins ON dbo.tblFishDeposit.binCode = dbo.tblFishBins.binCode INNER JOIN
+							  dbo.tblFishSpecie ON dbo.tblFishDeposit.specieCode = dbo.tblFishSpecie.specieCode INNER JOIN
+							  dbo.tblFishSizes ON dbo.tblFishDeposit.sizeCode = dbo.tblFishSizes.sizeCode
+				WHERE
+					(dbo.tblFishDeposit.dateTimeTransfer BETWEEN @dateFrom and @dateTo); 
+				
+			OPEN bin_Cursor
+			FETCH NEXT FROM bin_Cursor INTO @dateUnloaded, @rr, @tripCode, @bin, @lotId, @species, @sizes, @nwIN, @outDate, @nwOUT, @noOfDays 
+						
+			WHILE @@FETCH_STATUS = 0
+				BEGIN
+					INSERT INTO @bufferTable
+					VALUES(@dateUnloaded, @rr, @tripCode, @bin, @lotId, @species, @sizes, @nwIN, @outDate, @nwOUT, @noOfDays)
+									
+					UPDATE @bufferTable
+					SET
+						outDate = (SELECT dbo.tblFishWithdrawal.prodnDate
+									FROM dbo.tblFishDeposit INNER JOIN
+									dbo.tblFishWithdrawal_Details ON dbo.tblFishDeposit.depositCode = dbo.tblFishWithdrawal_Details.depositCode INNER JOIN
+									dbo.tblFishWithdrawal ON dbo.tblFishWithdrawal_Details.fwsCode = dbo.tblFishWithdrawal.fwsCode INNER JOIN
+									dbo.tblFishBins ON dbo.tblFishDeposit.binCode = dbo.tblFishBins.binCode
+									WHERE     
+										(dbo.tblFishDeposit.dateTimeTransfer = @dateUnloaded) AND 
+										(dbo.tblFishDeposit.rrNo = @rr) AND 
+										(dbo.tblFishDeposit.batchlot = @tripCode) AND 
+										(dbo.tblFishBins.bin# = @bin)),
+						noOfDays = 0
+					WHERE
+						dateUnloaded = @dateUnloaded AND
+						rr = @rr AND
+						tripCode = @tripCode AND
+						bin = @bin
+						
+					UPDATE @bufferTable
+					SET
+						nwOUT = nwIN,
+						noOfDays = DATEDIFF(dd,dateUnloaded,outDate)
+					WHERE
+						(outDate IS NOT NULL) OR
+						(NOT(outDate = ''))
+						
+					FETCH NEXT FROM bin_Cursor INTO @dateUnloaded, @rr, @tripCode, @bin, @lotId, @species, @sizes, @nwIN, @outDate, @nwOUT, @noOfDays 
+				END;
+			
+			CLOSE bin_Cursor;
+			DEALLOCATE bin_Cursor;
+			
+			SELECT dateUnloaded AS [Date Unloaded], rr AS [Receipt#], tripCode AS [Trip Code], 
+				bin AS [Bin No.], lotId AS [Lot Id], species AS [Fish Species], 
+				sizes AS [Fish Sizes], nwIN AS TonsIN, outDate AS [Date Out], 
+				nwOUT AS TonsOUT, noOfDays AS [Days]
+			FROM @bufferTable
+		END
+END
+GO
+
+
+--*********************************************************************************************************************************************************************
+
+
+USE [dbOIS]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_displayAll_LotStatus]    Script Date: 04/26/2013 10:31:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[proc_displayAll_LotStatus]
+	-- Add the parameters for the stored procedure here
+	@dateTo datetime,
+	@dateUnloaded datetime,
+	@dateExpire datetime
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+--	SELECT DISTINCT 
+--                      dbo.tblFishingVessel.vesselName AS [Vessel Name], dbo.tblBatchlot.lot# AS [Lot No.], @dateUnloaded AS [Date Unloaded], 
+--                      @dateExpire AS [Due Date]
+--	FROM         dbo.tblBatchlot INNER JOIN
+--                      dbo.tblCatchCertificate ON dbo.tblBatchlot.cc# = dbo.tblCatchCertificate.cc# INNER JOIN
+--                      dbo.tblFishingVessel ON dbo.tblCatchCertificate.vesselCode = dbo.tblFishingVessel.vesselCode INNER JOIN
+--                      dbo.tblFishDeposit ON dbo.tblBatchlot.lot# = dbo.tblFishDeposit.batchlot
+--	WHERE     
+--		(dbo.tblFishDeposit.depositStatus LIKE '*') AND 
+--		(dbo.tblFishDeposit.dateTimeTransfer <= @dateTo) AND 
+--		(dbo.tblFishDeposit.withdraw LIKE 'NO') AND 
+--		(dbo.tblFishDeposit.sample = 'NO')
+--	GROUP BY dbo.tblBatchlot.lot#, dbo.tblFishingVessel.vesselName
+
+	DECLARE @tmpTable TABLE (
+		vesselName varchar(50),
+		lot# varchar(50),
+		dateUnloaded datetime,
+		dueDate datetime)
+		
+	DECLARE @vessel varchar(50),
+		@lot varchar(50),
+		@unloadedDate datetime,
+		@dueDate datetime
+		
+	DECLARE boat_Cursor CURSOR FOR	
+		SELECT     dbo.tblFishingVessel.vesselName AS [Vessel Name], dbo.tblBatchlot.lot# AS [Trip Code], @dateUnloaded AS [Date Unloaded], 
+                      @dateExpire AS [Due Date]
+		FROM         dbo.tblBatchlot INNER JOIN
+                      dbo.tblCatchCertificate ON dbo.tblBatchlot.cc# = dbo.tblCatchCertificate.cc# INNER JOIN
+                      dbo.tblFishingVessel ON dbo.tblCatchCertificate.vesselCode = dbo.tblFishingVessel.vesselCode
+		WHERE     
+			(dbo.tblBatchlot.settled = 'N');
+			
+	OPEN boat_Cursor;
+	FETCH NEXT FROM boat_Cursor INTO @vessel, @lot, @unloadedDate, @dueDate
+	
+	WHILE @@FETCH_STATUS = 0
+		BEGIN
+			INSERT INTO @tmpTable
+			VALUES (@vessel, @lot, @unloadedDate, @dueDate)
+			
+			UPDATE @tmpTable
+			SET
+				--dateUnloaded = (EXEC proc_getFVLastUnloadingDate @lot),
+				dateUnloaded = (SELECT DISTINCT TOP 1 dateTimeTransfer
+								FROM         dbo.tblFishDeposit INNER JOIN
+									dbo.tblFishSizes ON dbo.tblFishDeposit.sizeCode = dbo.tblFishSizes.sizeCode
+								WHERE     
+									(batchlot = @lot) AND
+									(NOT (dbo.tblFishSizes.sizeRange = 'Bags'))
+								ORDER BY dateTimeTransfer DESC),
+				dueDate = DATEADD(dd, 45, (SELECT DISTINCT TOP 1 dateTimeTransfer
+								FROM         dbo.tblFishDeposit INNER JOIN
+									dbo.tblFishSizes ON dbo.tblFishDeposit.sizeCode = dbo.tblFishSizes.sizeCode
+								WHERE     
+									(batchlot = @lot) AND
+									(NOT (dbo.tblFishSizes.sizeRange = 'Bags'))
+								ORDER BY dateTimeTransfer DESC))
+			WHERE
+				lot# = @lot
+				
+			FETCH NEXT FROM boat_Cursor INTO @vessel, @lot, @unloadedDate, @dueDate
+		END
+		
+	CLOSE boat_Cursor;
+	DEALLOCATE boat_Cursor;
+	
+	SELECT vesselName AS [Vessel Name], lot# AS [Trip Code], 
+		dateUnloaded AS [Date Unloaded], dueDate AS  [Due Date]
+	FROM @tmpTable	
+	ORDER BY dueDate
+	--ORDER BY dbo.tblBatchlot.id
+END
+
+
+--*********************************************************************************************************************************************************************
+
+
+
+
+
+
+

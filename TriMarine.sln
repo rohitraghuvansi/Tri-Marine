@@ -1,0 +1,153 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.BusinessLayer", "TMG.BusinessLayer\TMG.BusinessLayer.csproj", "{3CE01912-506B-4DB8-9273-E2DF2611F71A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.DataAccessLayer", "TMG.DataAccessLayer\TMG.DataAccessLayer.csproj", "{69B6238F-265B-4A50-B924-6F07FFC82C45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.DataTransferObjects", "TMG.DataTransferObjects\TMG.DataTransferObjects.csproj", "{FCD9041A-5433-4247-9753-94E5B91DE7AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TMG Presentation Layer", "TMG Presentation Layer", "{E781C26A-5E8D-420F-B8BA-1301FA0A5352}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TMG Business Layer", "TMG Business Layer", "{D281FEB9-51D7-47DC-BE1A-D6BBD0C5497A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TMG Data Access Layer", "TMG Data Access Layer", "{FDAA846D-9B0C-4172-AA3F-CEC4894DEB4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.WinForms", "TMG Win Forms\TMG.WinForms.csproj", "{C59ED2C6-8597-4F64-B3F7-ABBDF3215B57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TMG Common", "TMG Common", "{1FB02B88-E83E-4E15-8D73-DB38468F3F83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.Utilities", "TMG.Utilities\TMG.Utilities.csproj", "{FBE53C89-BA27-4FEB-A16F-5DC2F883FBA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.Logging", "TMG.Logging\TMG.Logging.csproj", "{C43E7119-F58D-40D3-BF90-F80A4CCE6BB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.ExternalLibrary", "TMG.ExternalLibrary\TMG.ExternalLibrary.csproj", "{C08B3CCF-DEB1-4FD0-A7AA-11C31D5BD2E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.EventAggregator", "TMG.EventAggregator\TMG.EventAggregator.csproj", "{53418DD4-6707-4F7B-AC00-26D43AD7397B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.BusinessLayer.Interfaces", "TMG.BusinessLayer.Interfaces\TMG.BusinessLayer.Interfaces.csproj", "{95E7D91E-588F-4B95-AE6B-84005296361F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMG.DataAccessLayer.Interfaces", "TMG.DataAccessLayer.Interfaces\TMG.DataAccessLayer.Interfaces.csproj", "{60B39E27-949E-41AA-8A79-DDA9503B6170}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TMG UnitTests", "TMG UnitTests", "{CC27F576-43BD-4E93-AC54-A1D4C56CBAF0}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TMGPIS", "TMGPIS v2\TMGPIS.vbproj", "{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 12
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://in-srv-gbase2:8080/tfs/ggsapps
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TMG\u0020Win\u0020Forms\\TMG.WinForms.csproj
+		SccProjectTopLevelParentUniqueName1 = TriMarine.sln
+		SccProjectName1 = TMG\u0020Win\u0020Forms
+		SccLocalPath1 = TMG\u0020Win\u0020Forms
+		SccProjectUniqueName2 = TMG.BusinessLayer.Interfaces\\TMG.BusinessLayer.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName2 = TriMarine.sln
+		SccProjectName2 = TMG.BusinessLayer.Interfaces
+		SccLocalPath2 = TMG.BusinessLayer.Interfaces
+		SccProjectUniqueName3 = TMG.BusinessLayer\\TMG.BusinessLayer.csproj
+		SccProjectTopLevelParentUniqueName3 = TriMarine.sln
+		SccProjectName3 = TMG.BusinessLayer
+		SccLocalPath3 = TMG.BusinessLayer
+		SccProjectUniqueName4 = TMG.DataAccessLayer.Interfaces\\TMG.DataAccessLayer.Interfaces.csproj
+		SccProjectTopLevelParentUniqueName4 = TriMarine.sln
+		SccProjectName4 = TMG.DataAccessLayer.Interfaces
+		SccLocalPath4 = TMG.DataAccessLayer.Interfaces
+		SccProjectUniqueName5 = TMG.DataAccessLayer\\TMG.DataAccessLayer.csproj
+		SccProjectTopLevelParentUniqueName5 = TriMarine.sln
+		SccProjectName5 = TMG.DataAccessLayer
+		SccLocalPath5 = TMG.DataAccessLayer
+		SccProjectUniqueName6 = TMG.DataTransferObjects\\TMG.DataTransferObjects.csproj
+		SccProjectTopLevelParentUniqueName6 = TriMarine.sln
+		SccProjectName6 = TMG.DataTransferObjects
+		SccLocalPath6 = TMG.DataTransferObjects
+		SccProjectUniqueName7 = TMG.EventAggregator\\TMG.EventAggregator.csproj
+		SccProjectTopLevelParentUniqueName7 = TriMarine.sln
+		SccProjectName7 = TMG.EventAggregator
+		SccLocalPath7 = TMG.EventAggregator
+		SccProjectUniqueName8 = TMG.ExternalLibrary\\TMG.ExternalLibrary.csproj
+		SccProjectTopLevelParentUniqueName8 = TriMarine.sln
+		SccProjectName8 = TMG.ExternalLibrary
+		SccLocalPath8 = TMG.ExternalLibrary
+		SccProjectUniqueName9 = TMG.Logging\\TMG.Logging.csproj
+		SccProjectTopLevelParentUniqueName9 = TriMarine.sln
+		SccProjectName9 = TMG.Logging
+		SccLocalPath9 = TMG.Logging
+		SccProjectUniqueName10 = TMG.Utilities\\TMG.Utilities.csproj
+		SccProjectTopLevelParentUniqueName10 = TriMarine.sln
+		SccProjectName10 = TMG.Utilities
+		SccLocalPath10 = TMG.Utilities
+		SccProjectUniqueName11 = TMGPIS\u0020v2\\TMGPIS.vbproj
+		SccProjectTopLevelParentUniqueName11 = TriMarine.sln
+		SccProjectName11 = TMGPIS\u0020v2
+		SccLocalPath11 = TMGPIS\u0020v2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3CE01912-506B-4DB8-9273-E2DF2611F71A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CE01912-506B-4DB8-9273-E2DF2611F71A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CE01912-506B-4DB8-9273-E2DF2611F71A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CE01912-506B-4DB8-9273-E2DF2611F71A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69B6238F-265B-4A50-B924-6F07FFC82C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69B6238F-265B-4A50-B924-6F07FFC82C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69B6238F-265B-4A50-B924-6F07FFC82C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69B6238F-265B-4A50-B924-6F07FFC82C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCD9041A-5433-4247-9753-94E5B91DE7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCD9041A-5433-4247-9753-94E5B91DE7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCD9041A-5433-4247-9753-94E5B91DE7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCD9041A-5433-4247-9753-94E5B91DE7AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C59ED2C6-8597-4F64-B3F7-ABBDF3215B57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C59ED2C6-8597-4F64-B3F7-ABBDF3215B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C59ED2C6-8597-4F64-B3F7-ABBDF3215B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C59ED2C6-8597-4F64-B3F7-ABBDF3215B57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE53C89-BA27-4FEB-A16F-5DC2F883FBA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE53C89-BA27-4FEB-A16F-5DC2F883FBA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE53C89-BA27-4FEB-A16F-5DC2F883FBA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE53C89-BA27-4FEB-A16F-5DC2F883FBA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C43E7119-F58D-40D3-BF90-F80A4CCE6BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C43E7119-F58D-40D3-BF90-F80A4CCE6BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C43E7119-F58D-40D3-BF90-F80A4CCE6BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C43E7119-F58D-40D3-BF90-F80A4CCE6BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C08B3CCF-DEB1-4FD0-A7AA-11C31D5BD2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C08B3CCF-DEB1-4FD0-A7AA-11C31D5BD2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C08B3CCF-DEB1-4FD0-A7AA-11C31D5BD2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C08B3CCF-DEB1-4FD0-A7AA-11C31D5BD2E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53418DD4-6707-4F7B-AC00-26D43AD7397B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53418DD4-6707-4F7B-AC00-26D43AD7397B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53418DD4-6707-4F7B-AC00-26D43AD7397B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53418DD4-6707-4F7B-AC00-26D43AD7397B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95E7D91E-588F-4B95-AE6B-84005296361F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95E7D91E-588F-4B95-AE6B-84005296361F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95E7D91E-588F-4B95-AE6B-84005296361F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95E7D91E-588F-4B95-AE6B-84005296361F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60B39E27-949E-41AA-8A79-DDA9503B6170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60B39E27-949E-41AA-8A79-DDA9503B6170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60B39E27-949E-41AA-8A79-DDA9503B6170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60B39E27-949E-41AA-8A79-DDA9503B6170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3CE01912-506B-4DB8-9273-E2DF2611F71A} = {D281FEB9-51D7-47DC-BE1A-D6BBD0C5497A}
+		{95E7D91E-588F-4B95-AE6B-84005296361F} = {D281FEB9-51D7-47DC-BE1A-D6BBD0C5497A}
+		{69B6238F-265B-4A50-B924-6F07FFC82C45} = {FDAA846D-9B0C-4172-AA3F-CEC4894DEB4B}
+		{60B39E27-949E-41AA-8A79-DDA9503B6170} = {FDAA846D-9B0C-4172-AA3F-CEC4894DEB4B}
+		{FCD9041A-5433-4247-9753-94E5B91DE7AD} = {1FB02B88-E83E-4E15-8D73-DB38468F3F83}
+		{FBE53C89-BA27-4FEB-A16F-5DC2F883FBA2} = {1FB02B88-E83E-4E15-8D73-DB38468F3F83}
+		{C43E7119-F58D-40D3-BF90-F80A4CCE6BB0} = {1FB02B88-E83E-4E15-8D73-DB38468F3F83}
+		{C08B3CCF-DEB1-4FD0-A7AA-11C31D5BD2E5} = {1FB02B88-E83E-4E15-8D73-DB38468F3F83}
+		{C59ED2C6-8597-4F64-B3F7-ABBDF3215B57} = {E781C26A-5E8D-420F-B8BA-1301FA0A5352}
+		{53418DD4-6707-4F7B-AC00-26D43AD7397B} = {E781C26A-5E8D-420F-B8BA-1301FA0A5352}
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5} = {E781C26A-5E8D-420F-B8BA-1301FA0A5352}
+	EndGlobalSection
+EndGlobal

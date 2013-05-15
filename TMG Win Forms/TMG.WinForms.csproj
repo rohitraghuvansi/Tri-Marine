@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C59ED2C6-8597-4F64-B3F7-ABBDF3215B57}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TMG.WinForms</RootNamespace>
+    <AssemblyName>TMG Win Forms</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C1.Win.C1Ribbon.4, Version=4.0.20131.440, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TMG.ExternalLibrary\C1.Win.C1Ribbon.4.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\TMG.ExternalLibrary\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationController\ApplicationController.cs" />
+    <Compile Include="ApplicationController\IApplicationController.cs" />
+    <Compile Include="ApplicationController\ICommand.cs" />
+    <Compile Include="ErrorHandling\ErrorMessage.cs" />
+    <Compile Include="ErrorHandling\ErrorMessageCollection.cs" />
+    <Compile Include="ErrorHandling\IValidate.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presenters\frmMainMenuPresenter.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StructureMap\AppContext.cs" />
+    <Compile Include="StructureMap\BootStrapper.cs" />
+    <Compile Include="StructureMap\DefaultRegistry.cs" />
+    <Compile Include="StructureMap\EventAggregatorInterceptor.cs" />
+    <Compile Include="Views\frmMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmMainMenu.Designer.cs">
+      <DependentUpon>frmMainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewInterfaces\IfrmMainMenu.cs" />
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Views\frmMainMenu.resx">
+      <DependentUpon>frmMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ClientService\ServiceInterface\" />
+    <Folder Include="Command\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TMG.EventAggregator\TMG.EventAggregator.csproj">
+      <Project>{53418dd4-6707-4f7b-ac00-26d43ad7397b}</Project>
+      <Name>TMG.EventAggregator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TMGPIS v2\TMGPIS.vbproj">
+      <Project>{6ef87afc-6934-4f59-bf1e-3f6a447dcde5}</Project>
+      <Name>TMGPIS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\001_39.ico" />
+    <None Include="Resources\BOOKS02.ICO" />
+    <None Include="Resources\button_white_load.ico" />
+    <None Include="Resources\cdplus.ico" />
+    <None Include="Resources\cd_add.ico" />
+    <None Include="Resources\clipboard_edit.ico" />
+    <None Include="Resources\comment_edit.ico" />
+    <None Include="Resources\copy%281%29.ico" />
+    <None Include="Resources\copy.ico" />
+    <None Include="Resources\copy_document.ico" />
+    <None Include="Resources\Delete.ico" />
+    <None Include="Resources\document_edit%281%29.ico" />
+    <None Include="Resources\document_edit.ico" />
+    <None Include="Resources\document_new.ico" />
+    <None Include="Resources\Edit.ico" />
+    <None Include="Resources\edit_add.ico" />
+    <None Include="Resources\edit_go.ico" />
+    <None Include="Resources\edit_trash.ico" />
+    <None Include="Resources\file_edit.ico" />
+    <None Include="Resources\find%281%29.ico" />
+    <None Include="Resources\find.ico" />
+    <None Include="Resources\folder_open_edit.ico" />
+    <None Include="Resources\load%281%29.ico" />
+    <None Include="Resources\load%282%29.ico" />
+    <None Include="Resources\load.ico" />
+    <None Include="Resources\mail_new.ico" />
+    <None Include="Resources\new_doc.ico" />
+    <None Include="Resources\NOTE10C.ICO" />
+    <None Include="Resources\pencil.ico" />
+    <None Include="Resources\save.ico" />
+    <None Include="Resources\save_add2.ico" />
+    <None Include="Resources\save_labled_add.ico" />
+    <None Include="Resources\script_editor.ico" />
+    <None Include="Resources\stop.ico" />
+    <None Include="Resources\stop1.ico" />
+    <None Include="Resources\tag_blue_edit.ico" />
+    <None Include="Resources\unlock.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

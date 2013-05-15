@@ -1,0 +1,26 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TMGPIS", "TMGPIS.vbproj", "{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "tSetup", "tSetup\tSetup.vdproj", "{D4C373E2-BB8D-4EF2-B353-48A2B07FBE1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Debug.ActiveCfg = Debug|.NET
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Debug.Build.0 = Debug|.NET
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Release.ActiveCfg = Release|.NET
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Release.Build.0 = Release|.NET
+		{D4C373E2-BB8D-4EF2-B353-48A2B07FBE1B}.Debug.ActiveCfg = Debug
+		{D4C373E2-BB8D-4EF2-B353-48A2B07FBE1B}.Release.ActiveCfg = Release
+		{D4C373E2-BB8D-4EF2-B353-48A2B07FBE1B}.Release.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,1480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.30319</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon />
+    <AssemblyKeyContainerName />
+    <AssemblyName>TMGPIS</AssemblyName>
+    <AssemblyOriginatorKeyFile />
+    <AssemblyOriginatorKeyMode>None</AssemblyOriginatorKeyMode>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>Off</OptionStrict>
+    <RootNamespace>TMGPIS</RootNamespace>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>TMGPIS.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile />
+    <DefineConstants />
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>41998,42004,42016,42017,42018,42019,42020,42021,42022,42024,42025,42026,42029,42030,42031,42032,42099,42104,42105,42106,42107,42108,42109,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>TMGPIS.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile />
+    <DefineConstants />
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>41998,42004,42016,42017,42018,42019,42020,42021,42022,42024,42025,42026,42029,42030,42031,42032,42099,42104,42105,42106,42107,42108,42109,42353,42354,42355</NoWarn>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C1.Common, Version=1.0.20031.116, Culture=neutral, PublicKeyToken=e272bb32d11b1948">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TMG.ExternalLibrary\ComponentOneV1\C1.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1BarCode, Version=1.0.20063.14, Culture=neutral, PublicKeyToken=79882d576c6336da">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TMG.ExternalLibrary\ComponentOneV1\C1.Win.C1BarCode.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Input, Version=1.0.20063.301, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TMG.ExternalLibrary\ComponentOneV1\C1.Win.C1Input.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1List, Version=1.1.20063.108, Culture=neutral, PublicKeyToken=6b24f8f981dbd7bc">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TMG.ExternalLibrary\ComponentOneV1\C1.Win.C1List.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Report, Version=2.5.20063.223, Culture=neutral, PublicKeyToken=79882d576c6336da">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TMG.ExternalLibrary\ComponentOneV1\C1.Win.C1Report.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1ReportDesigner, Version=2.5.20063.223, Culture=neutral, PublicKeyToken=79882d576c6336da">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TMG.ExternalLibrary\ComponentOneV1\C1.Win.C1ReportDesigner.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Ribbon.4, Version=4.0.20131.440, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TMG.ExternalLibrary\ComponentOneV1\C1.Win.C1Ribbon.4.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1TrueDBGrid, Version=1.4.20063.60825, Culture=neutral, PublicKeyToken=75ae3fb0e2b1e0da">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TMG.ExternalLibrary\ComponentOneV1\C1.Win.C1TrueDBGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Interop.Excel">
+      <Name>Interop.Excel</Name>
+      <HintPath>bin\Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Microsoft.Office.Core">
+      <Name>Interop.Microsoft.Office.Core</Name>
+      <HintPath>bin\Interop.Microsoft.Office.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Microsoft.Office.Interop.Excel">
+      <Name>Interop.Microsoft.Office.Interop.Excel</Name>
+      <HintPath>bin\Interop.Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="dsLotSummarySpoilage.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsLotSummarySpoilage.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintColdStorageMetrics.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintColdStorageMetrics.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintFGOutput_Seamer.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintFGOutput_Seamer.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintFishDeposit.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintFishDeposit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintFishDeposit.vb">
+      <DependentUpon>dsPrintFishDeposit.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintFWR_Lot.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintFWR_Lot.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintFWS_byProdnDate.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintFWS_byProdnDate.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintInventoryReport_byCS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintInventoryReport_byCS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintInventory_Total.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintInventory_Total.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintLotDetailsBySublot.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintLotDetailsBySublot.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintPalletTag.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintPalletTag.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintRoundFishReceipts.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintRoundFishReceipts.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintRoundFishReceiptsPerSublot.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintRoundFishReceiptsPerSublot.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintRRDetails.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintRRDetails.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsPrintTotalReceipts.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrintTotalReceipts.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frmA.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAnalysis_FG.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAnalysis_FG_DataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAnalysis_Raw_DataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAnalysis_Raw_Listings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAnalysis_RF.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBagsWithdrawal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBatchlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBinHistory.Designer.vb">
+      <DependentUpon>frmBinHistory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBinHistory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBOM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCalibration.Designer.vb">
+      <DependentUpon>frmCalibration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCalibration.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCanSize.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColdStorage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColdStorage_Map.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCOP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCOS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDefects.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFAO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFGDefects.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFGInvoice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFGOutput.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFGShipment.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFGWW.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFGWW_DataEntry.Designer.vb">
+      <DependentUpon>frmFGWW_DataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFGWW_DataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishBin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishDeposit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishDeposit_DataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishDeposit_DataEntry2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishDeposit_DataEntry3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishDeposit_DataEntry4.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishDeposit_Loin_Bags.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishingVessel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishLot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishOwner.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishRacking.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishReceipts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishReceiptsReceiving.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishSize.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishSupplier.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishWithdrawal.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishWithdrawal_Bags.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishWithdrawal_DataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFishWithdrawal_DataEntry2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInqFishBinSettlement.Designer.vb">
+      <DependentUpon>frmInqFishBinSettlement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInqFishBinSettlement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInqPalletAllocation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInqProductRecovery.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInqProductTraceability.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLabeling_DataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLabeling_DataEntry2.Designer.vb">
+      <DependentUpon>frmLabeling_DataEntry2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLabeling_DataEntry2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLabelling.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLabels.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogIn.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMaterialCost.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMeatPercentage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMeatRecovery.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMRN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMRN_BegInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMRN_Manufacturer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMRN_Materials.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMRN_Supplier.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMRN_Usage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMRN_Usage_DataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOverridePalletAllocation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPreparePackingLists.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintColdStorageMetrics.Designer.vb">
+      <DependentUpon>frmPrintColdStorageMetrics.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrintColdStorageMetrics.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintCommercialInvoice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintFGOutput_Seamer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintFishSpoilages.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintFishSpoilages_byLotNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintFWR.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintFZInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintInventory_Total_perRoom.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintInventory_TypeOfSet.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintLotActivity.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintPackingLists.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintPackingLists_Report.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintPalletTag.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintProductionOutputDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintProductionOutputDiscrepancy.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintReleaseReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintSummaryOfDepositsPerVoyage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintTotalReceipts.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrintTotalRoundFishWithAmount.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdCanSize.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdCleaning.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdFillerLine.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdLoinSize.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdMedia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdPackStyle.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdPeriod.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProdSpecie.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProduct.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductCosting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductCosting_LaborRate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductCosting_OH.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductCosting_UtilityExpenses.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductDescription.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProduction.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductionScheduleDataEntry.Designer.vb">
+      <DependentUpon>frmProductionScheduleDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmProductionScheduleDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProductionScheduleListing.Designer.vb">
+      <DependentUpon>frmProductionScheduleListing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmProductionScheduleListing.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPushBack.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQCDisposition.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQCSample.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReleaseNote.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSearch.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSection.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSICC.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSICC_DataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSICC_DataEntry2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSpecie.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSpecie2.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSpoilage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSpoilage_Rounds.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStartupTimeDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSTP_FishInventory.Designer.vb">
+      <DependentUpon>frmSTP_FishInventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmSTP_FishInventory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateFishBin_Deposit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateFishLot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewInventory_FishDeposit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewLotStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWarehouse.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modModule.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="rptInventory_Total.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptInventory_Total.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintBinDetailsBySublot.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintBinDetailsBySublot.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintColdStorageMetrics.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintColdStorageMetrics.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintCommercialInvoices.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintCommercialInvoices.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFGOutput_Seamer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFGOutput_Seamer.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFishDeposit.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFishDeposit.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFishDepositPaymentSummary.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFishDepositPaymentSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFishDepositPerSublot.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFishDepositPerSublot.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFishLotSpoilages.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFishLotSpoilages.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFishLotSpoilages_byDefects.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFishLotSpoilages_byDefects.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFishLotSpoilages_byDetails.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFishLotSpoilages_byDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFishReceipts.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFishReceipts.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFishSpoilage.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFishSpoilage.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFWR_Lot.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFWR_Lot.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintFWS_byProdnDate.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintFWS_byProdnDate.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintLoadingReport.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintLoadingReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintPackingLists2.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintPackingLists2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintPalletTag.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintPalletTag.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintPalletTag_FZ.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintPalletTag_FZ.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintProductionOutputDetails2.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintProductionOutputDetails2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintReleaseReport.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintReleaseReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintRoundFishInventory_byCS.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintRoundFishInventory_byCS.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptPrintRRDetails.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptPrintRRDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="frmA.resx">
+      <DependentUpon>frmA.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAbout.resx">
+      <DependentUpon>frmAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAnalysis_FG.resx">
+      <DependentUpon>frmAnalysis_FG.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAnalysis_FG_DataEntry.resx">
+      <DependentUpon>frmAnalysis_FG_DataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAnalysis_Raw_DataEntry.resx">
+      <DependentUpon>frmAnalysis_Raw_DataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAnalysis_Raw_Listings.resx">
+      <DependentUpon>frmAnalysis_Raw_Listings.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAnalysis_RF.resx">
+      <DependentUpon>frmAnalysis_RF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBagsWithdrawal.resx">
+      <DependentUpon>frmBagsWithdrawal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBatchlot.resx">
+      <DependentUpon>frmBatchlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBinHistory.resx">
+      <DependentUpon>frmBinHistory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBOM.resx">
+      <DependentUpon>frmBOM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCalibration.resx">
+      <DependentUpon>frmCalibration.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCanSize.resx">
+      <DependentUpon>frmCanSize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColdStorage.resx">
+      <DependentUpon>frmColdStorage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColdStorage_Map.resx">
+      <DependentUpon>frmColdStorage_Map.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCOP.resx">
+      <DependentUpon>frmCOP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCOS.resx">
+      <DependentUpon>frmCOS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmD.resx">
+      <DependentUpon>frmD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDefects.resx">
+      <DependentUpon>frmDefects.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFAO.resx">
+      <DependentUpon>frmFAO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFGDefects.resx">
+      <DependentUpon>frmFGDefects.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFGInvoice.resx">
+      <DependentUpon>frmFGInvoice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFGOutput.resx">
+      <DependentUpon>frmFGOutput.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFGShipment.resx">
+      <DependentUpon>frmFGShipment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFGWW.resx">
+      <DependentUpon>frmFGWW.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFGWW_DataEntry.resx">
+      <DependentUpon>frmFGWW_DataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishBin.resx">
+      <DependentUpon>frmFishBin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishDeposit.resx">
+      <DependentUpon>frmFishDeposit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishDeposit_DataEntry.resx">
+      <DependentUpon>frmFishDeposit_DataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishDeposit_DataEntry2.resx">
+      <DependentUpon>frmFishDeposit_DataEntry2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishDeposit_DataEntry3.resx">
+      <DependentUpon>frmFishDeposit_DataEntry3.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishDeposit_DataEntry4.resx">
+      <DependentUpon>frmFishDeposit_DataEntry4.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishDeposit_Loin_Bags.resx">
+      <DependentUpon>frmFishDeposit_Loin_Bags.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishingVessel.resx">
+      <DependentUpon>frmFishingVessel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishLot.resx">
+      <DependentUpon>frmFishLot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishOwner.resx">
+      <DependentUpon>frmFishOwner.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishRacking.resx">
+      <DependentUpon>frmFishRacking.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishReceipts.resx">
+      <DependentUpon>frmFishReceipts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishReceiptsReceiving.resx">
+      <DependentUpon>frmFishReceiptsReceiving.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishSize.resx">
+      <DependentUpon>frmFishSize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishSupplier.resx">
+      <DependentUpon>frmFishSupplier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishWithdrawal.resx">
+      <DependentUpon>frmFishWithdrawal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishWithdrawal_Bags.resx">
+      <DependentUpon>frmFishWithdrawal_Bags.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishWithdrawal_DataEntry.resx">
+      <DependentUpon>frmFishWithdrawal_DataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFishWithdrawal_DataEntry2.resx">
+      <DependentUpon>frmFishWithdrawal_DataEntry2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInqFishBinSettlement.resx">
+      <DependentUpon>frmInqFishBinSettlement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInqPalletAllocation.resx">
+      <DependentUpon>frmInqPalletAllocation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInqProductRecovery.resx">
+      <DependentUpon>frmInqProductRecovery.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInqProductTraceability.resx">
+      <DependentUpon>frmInqProductTraceability.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLabeling_DataEntry.resx">
+      <DependentUpon>frmLabeling_DataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLabeling_DataEntry2.resx">
+      <DependentUpon>frmLabeling_DataEntry2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLabelling.resx">
+      <DependentUpon>frmLabelling.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLabels.resx">
+      <DependentUpon>frmLabels.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogIn.resx">
+      <DependentUpon>frmLogIn.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenu.resx">
+      <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMaterialCost.resx">
+      <DependentUpon>frmMaterialCost.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMeatPercentage.resx">
+      <DependentUpon>frmMeatPercentage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMeatRecovery.resx">
+      <DependentUpon>frmMeatRecovery.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMRN.resx">
+      <DependentUpon>frmMRN.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMRN_BegInventory.resx">
+      <DependentUpon>frmMRN_BegInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMRN_Manufacturer.resx">
+      <DependentUpon>frmMRN_Manufacturer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMRN_Materials.resx">
+      <DependentUpon>frmMRN_Materials.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMRN_Supplier.resx">
+      <DependentUpon>frmMRN_Supplier.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMRN_Usage.resx">
+      <DependentUpon>frmMRN_Usage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMRN_Usage_DataEntry.resx">
+      <DependentUpon>frmMRN_Usage_DataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOverridePalletAllocation.resx">
+      <DependentUpon>frmOverridePalletAllocation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPreparePackingLists.resx">
+      <DependentUpon>frmPreparePackingLists.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintColdStorageMetrics.resx">
+      <DependentUpon>frmPrintColdStorageMetrics.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintCommercialInvoice.resx">
+      <DependentUpon>frmPrintCommercialInvoice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintFGOutput_Seamer.resx">
+      <DependentUpon>frmPrintFGOutput_Seamer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintFishSpoilages.resx">
+      <DependentUpon>frmPrintFishSpoilages.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintFishSpoilages_byLotNo.resx">
+      <DependentUpon>frmPrintFishSpoilages_byLotNo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintFWR.resx">
+      <DependentUpon>frmPrintFWR.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintFZInventory.resx">
+      <DependentUpon>frmPrintFZInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintInventory_Total_perRoom.resx">
+      <DependentUpon>frmPrintInventory_Total_perRoom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintInventory_TypeOfSet.resx">
+      <DependentUpon>frmPrintInventory_TypeOfSet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintLotActivity.resx">
+      <DependentUpon>frmPrintLotActivity.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintPackingLists.resx">
+      <DependentUpon>frmPrintPackingLists.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintPackingLists_Report.resx">
+      <DependentUpon>frmPrintPackingLists_Report.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintPalletTag.resx">
+      <DependentUpon>frmPrintPalletTag.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintProductionOutputDetails.resx">
+      <DependentUpon>frmPrintProductionOutputDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintProductionOutputDiscrepancy.resx">
+      <DependentUpon>frmPrintProductionOutputDiscrepancy.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintReleaseReport.resx">
+      <DependentUpon>frmPrintReleaseReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintSummaryOfDepositsPerVoyage.resx">
+      <DependentUpon>frmPrintSummaryOfDepositsPerVoyage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintTotalReceipts.resx">
+      <DependentUpon>frmPrintTotalReceipts.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrintTotalRoundFishWithAmount.resx">
+      <DependentUpon>frmPrintTotalRoundFishWithAmount.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdCanSize.resx">
+      <DependentUpon>frmProdCanSize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdCleaning.resx">
+      <DependentUpon>frmProdCleaning.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdFillerLine.resx">
+      <DependentUpon>frmProdFillerLine.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdLoinSize.resx">
+      <DependentUpon>frmProdLoinSize.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdMedia.resx">
+      <DependentUpon>frmProdMedia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdPackStyle.resx">
+      <DependentUpon>frmProdPackStyle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdPeriod.resx">
+      <DependentUpon>frmProdPeriod.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProdSpecie.resx">
+      <DependentUpon>frmProdSpecie.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProduct.resx">
+      <DependentUpon>frmProduct.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductCosting.resx">
+      <DependentUpon>frmProductCosting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductCosting_LaborRate.resx">
+      <DependentUpon>frmProductCosting_LaborRate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductCosting_OH.resx">
+      <DependentUpon>frmProductCosting_OH.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductCosting_UtilityExpenses.resx">
+      <DependentUpon>frmProductCosting_UtilityExpenses.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductDescription.resx">
+      <DependentUpon>frmProductDescription.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProduction.resx">
+      <DependentUpon>frmProduction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductionScheduleDataEntry.resx">
+      <DependentUpon>frmProductionScheduleDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProductionScheduleListing.resx">
+      <DependentUpon>frmProductionScheduleListing.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPushBack.resx">
+      <DependentUpon>frmPushBack.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQCDisposition.resx">
+      <DependentUpon>frmQCDisposition.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQCSample.resx">
+      <DependentUpon>frmQCSample.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReleaseNote.resx">
+      <DependentUpon>frmReleaseNote.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSearch.resx">
+      <DependentUpon>frmSearch.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSection.resx">
+      <DependentUpon>frmSection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSICC.resx">
+      <DependentUpon>frmSICC.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSICC_DataEntry.resx">
+      <DependentUpon>frmSICC_DataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSICC_DataEntry2.resx">
+      <DependentUpon>frmSICC_DataEntry2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSpecie.resx">
+      <DependentUpon>frmSpecie.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSpecie2.resx">
+      <DependentUpon>frmSpecie2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSpoilage.resx">
+      <DependentUpon>frmSpoilage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSpoilage_Rounds.resx">
+      <DependentUpon>frmSpoilage_Rounds.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStartupTimeDate.resx">
+      <DependentUpon>frmStartupTimeDate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSTP_FishInventory.resx">
+      <DependentUpon>frmSTP_FishInventory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateFishBin_Deposit.resx">
+      <DependentUpon>frmUpdateFishBin_Deposit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateFishLot.resx">
+      <DependentUpon>frmUpdateFishLot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewInventory_FishDeposit.resx">
+      <DependentUpon>frmViewInventory_FishDeposit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewLotStatus.resx">
+      <DependentUpon>frmViewLotStatus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWarehouse.resx">
+      <DependentUpon>frmWarehouse.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="licenses.licx" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="rptInventory_Total.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptInventory_Total.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintBinDetailsBySublot.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintBinDetailsBySublot.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintColdStorageMetrics.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintColdStorageMetrics.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintCommercialInvoices.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintCommercialInvoices.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFGOutput_Seamer.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFGOutput_Seamer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFishDeposit.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFishDeposit.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFishDepositPaymentSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFishDepositPaymentSummary.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFishDepositPerSublot.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFishDepositPerSublot.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFishLotSpoilages.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFishLotSpoilages.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFishLotSpoilages_byDefects.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFishLotSpoilages_byDefects.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFishLotSpoilages_byDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFishLotSpoilages_byDetails.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFishReceipts.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFishReceipts.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFishSpoilage.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFishSpoilage.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFWR_Lot.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFWR_Lot.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintFWS_byProdnDate.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintFWS_byProdnDate.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintLoadingReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintLoadingReport.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintPackingLists2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintPackingLists2.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintPalletTag.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintPalletTag.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintPalletTag_FZ.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintPalletTag_FZ.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintProductionOutputDetails2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintProductionOutputDetails2.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintReleaseReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintReleaseReport.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintRoundFishInventory_byCS.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintRoundFishInventory_byCS.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptPrintRRDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptPrintRRDetails.vb</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="dsLotSummarySpoilage.xsc">
+      <DependentUpon>dsLotSummarySpoilage.xsd</DependentUpon>
+    </None>
+    <None Include="dsLotSummarySpoilage.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLotSummarySpoilage.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsLotSummarySpoilage.xss">
+      <DependentUpon>dsLotSummarySpoilage.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintColdStorageMetrics.xsc">
+      <DependentUpon>dsPrintColdStorageMetrics.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintColdStorageMetrics.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintColdStorageMetrics.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintColdStorageMetrics.xss">
+      <DependentUpon>dsPrintColdStorageMetrics.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintFGOutput_Seamer.xsc">
+      <DependentUpon>dsPrintFGOutput_Seamer.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintFGOutput_Seamer.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintFGOutput_Seamer.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintFGOutput_Seamer.xss">
+      <DependentUpon>dsPrintFGOutput_Seamer.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintFishDeposit.xsc">
+      <DependentUpon>dsPrintFishDeposit.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintFishDeposit.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintFishDeposit.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dsPrintFishDeposit.xss">
+      <DependentUpon>dsPrintFishDeposit.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintFishDeposit.xsx">
+      <DependentUpon>dsPrintFishDeposit.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintFWR_Lot.xsc">
+      <DependentUpon>dsPrintFWR_Lot.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintFWR_Lot.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintFWR_Lot.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintFWR_Lot.xss">
+      <DependentUpon>dsPrintFWR_Lot.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintFWS_byProdnDate.xsc">
+      <DependentUpon>dsPrintFWS_byProdnDate.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintFWS_byProdnDate.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintFWS_byProdnDate.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintFWS_byProdnDate.xss">
+      <DependentUpon>dsPrintFWS_byProdnDate.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintInventoryReport_byCS.xsc">
+      <DependentUpon>dsPrintInventoryReport_byCS.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintInventoryReport_byCS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintInventoryReport_byCS.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintInventoryReport_byCS.xss">
+      <DependentUpon>dsPrintInventoryReport_byCS.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintInventory_Total.xsc">
+      <DependentUpon>dsPrintInventory_Total.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintInventory_Total.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintInventory_Total.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dsPrintInventory_Total.xss">
+      <DependentUpon>dsPrintInventory_Total.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintInventory_Total.xsx">
+      <DependentUpon>dsPrintInventory_Total.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintLotDetailsBySublot.xsc">
+      <DependentUpon>dsPrintLotDetailsBySublot.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintLotDetailsBySublot.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintLotDetailsBySublot.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintLotDetailsBySublot.xss">
+      <DependentUpon>dsPrintLotDetailsBySublot.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintPalletTag.xsc">
+      <DependentUpon>dsPrintPalletTag.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintPalletTag.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintPalletTag.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintPalletTag.xss">
+      <DependentUpon>dsPrintPalletTag.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintRoundFishReceipts.xsc">
+      <DependentUpon>dsPrintRoundFishReceipts.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintRoundFishReceipts.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintRoundFishReceipts.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dsPrintRoundFishReceipts.xss">
+      <DependentUpon>dsPrintRoundFishReceipts.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintRoundFishReceipts.xsx">
+      <DependentUpon>dsPrintRoundFishReceipts.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintRoundFishReceiptsPerSublot.xsc">
+      <DependentUpon>dsPrintRoundFishReceiptsPerSublot.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintRoundFishReceiptsPerSublot.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintRoundFishReceiptsPerSublot.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintRoundFishReceiptsPerSublot.xss">
+      <DependentUpon>dsPrintRoundFishReceiptsPerSublot.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintRRDetails.xsc">
+      <DependentUpon>dsPrintRRDetails.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintRRDetails.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintRRDetails.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintRRDetails.xss">
+      <DependentUpon>dsPrintRRDetails.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintTotalReceipts.xsc">
+      <DependentUpon>dsPrintTotalReceipts.xsd</DependentUpon>
+    </None>
+    <None Include="dsPrintTotalReceipts.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrintTotalReceipts.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="dsPrintTotalReceipts.xss">
+      <DependentUpon>dsPrintTotalReceipts.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Settings.settings">
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+    <Service Include="{CF845C55-C321-4742-B673-E6212D061ED9}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent />
+    <PostBuildEvent />
+  </PropertyGroup>
+</Project>

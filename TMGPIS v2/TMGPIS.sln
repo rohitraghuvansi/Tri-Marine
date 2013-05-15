@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TMGPIS", "TMGPIS.vbproj", "{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{BB47F3F7-E439-4B5E-9501-D4E25706A42C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF87AFC-6934-4F59-BF1E-3F6A447DCDE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB47F3F7-E439-4B5E-9501-D4E25706A42C}.Debug|Any CPU.ActiveCfg = Debug
+		{BB47F3F7-E439-4B5E-9501-D4E25706A42C}.Debug|Any CPU.Build.0 = Debug
+		{BB47F3F7-E439-4B5E-9501-D4E25706A42C}.Release|Any CPU.ActiveCfg = Release
+		{BB47F3F7-E439-4B5E-9501-D4E25706A42C}.Release|Any CPU.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
